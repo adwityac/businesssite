@@ -87,9 +87,18 @@
   --bg:     #F0F2F5;
   --ink:    #0F1F3D;
   --muted:  #3D4F6B;
-  --accent: #E8C547;
+  --accent: #D4AA30;
   --soft:   #E6EAF2;
   --border: #D0D7E6;
+}
+
+[data-theme="dark"] {
+  --bg:     #0D1117;
+  --ink:    #E6EDF3;
+  --muted:  #8B949E;
+  --accent: #D4AA30;
+  --soft:   #161B22;
+  --border: #30363D;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -102,7 +111,30 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  transition: background 0.3s, color 0.3s;
 }
+
+/* ── THEME TOGGLE ── */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+.theme-toggle:hover { color: var(--ink); border-color: var(--ink); background: var(--soft); }
+.theme-toggle svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.icon-moon { display: none; }
+.icon-sun  { display: block; }
+[data-theme="dark"] .icon-moon { display: block; }
+[data-theme="dark"] .icon-sun  { display: none; }
 
 /* ── NAV ── */
 nav {
@@ -117,6 +149,10 @@ nav {
   background: rgba(240,242,245,0.94);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
+  transition: background 0.3s, border-color 0.3s;
+}
+[data-theme="dark"] nav {
+  background: rgba(13,17,23,0.94);
 }
 
 .logo {
@@ -151,14 +187,14 @@ nav {
 .nav-cta {
   display: inline-block;
   background: var(--ink);
-  color: #fff;
+  color: var(--bg);
   padding: 9px 20px;
   border-radius: 6px;
   text-decoration: none;
   font-size: 0.825rem;
   font-weight: 600;
   letter-spacing: 0.01em;
-  transition: background 0.15s, transform 0.15s;
+  transition: background 0.15s, transform 0.15s, color 0.15s;
 }
 .nav-cta:hover { background: var(--accent); color: var(--ink); transform: translateY(-1px); }
 
@@ -233,13 +269,13 @@ nav {
 .btn-dark {
   display: inline-block;
   background: var(--ink);
-  color: #fff;
+  color: var(--bg);
   padding: 13px 24px;
   border-radius: 6px;
   text-decoration: none;
   font-size: 0.875rem;
   font-weight: 600;
-  transition: background 0.15s, transform 0.15s;
+  transition: background 0.15s, transform 0.15s, color 0.15s;
 }
 .btn-dark:hover { background: var(--accent); color: var(--ink); transform: translateY(-2px); }
 
@@ -359,6 +395,7 @@ nav {
   padding: 80px 6%;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
+  transition: background 0.3s;
 }
 
 .about-inner {
@@ -406,7 +443,7 @@ nav {
   height: 22px;
   border-radius: 50%;
   background: var(--ink);
-  color: #fff;
+  color: var(--bg);
   font-size: 0.65rem;
   display: flex;
   align-items: center;
@@ -437,7 +474,7 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 0;
-  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s, background 0.3s;
   position: relative;
 }
 .pricing-card:hover {
@@ -445,14 +482,24 @@ nav {
   transform: translateY(-4px);
   box-shadow: 0 12px 40px rgba(0,0,0,0.07);
 }
+[data-theme="dark"] .pricing-card:hover {
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
 
 .pricing-card.featured {
   background: var(--ink);
   border-color: var(--ink);
 }
+[data-theme="dark"] .pricing-card.featured {
+  background: #E6EDF3;
+  border-color: #E6EDF3;
+}
 .pricing-card.featured:hover {
   border-color: var(--accent);
   box-shadow: 0 12px 40px rgba(15,31,61,0.25);
+}
+[data-theme="dark"] .pricing-card.featured:hover {
+  box-shadow: 0 12px 40px rgba(230,237,243,0.15);
 }
 
 .featured-badge {
@@ -468,6 +515,9 @@ nav {
   padding: 4px 12px;
   border-radius: 20px;
 }
+[data-theme="dark"] .featured-badge {
+  color: #0D1117;
+}
 
 .pricing-type {
   font-size: 0.72rem;
@@ -478,6 +528,7 @@ nav {
   margin-bottom: 16px;
 }
 .pricing-card.featured .pricing-type { color: rgba(255,255,255,0.45); }
+[data-theme="dark"] .pricing-card.featured .pricing-type { color: rgba(15,31,61,0.5); }
 
 .pricing-name {
   font-size: 1.5rem;
@@ -487,6 +538,7 @@ nav {
   margin-bottom: 8px;
 }
 .pricing-card.featured .pricing-name { color: #fff; }
+[data-theme="dark"] .pricing-card.featured .pricing-name { color: #0F1F3D; }
 
 .pricing-price {
   display: flex;
@@ -497,6 +549,7 @@ nav {
   border-bottom: 1px solid var(--border);
 }
 .pricing-card.featured .pricing-price { border-bottom-color: rgba(255,255,255,0.1); }
+[data-theme="dark"] .pricing-card.featured .pricing-price { border-bottom-color: rgba(15,31,61,0.15); }
 
 .price-symbol {
   font-size: 1.2rem;
@@ -504,6 +557,7 @@ nav {
   color: var(--muted);
 }
 .pricing-card.featured .price-symbol { color: rgba(255,255,255,0.5); }
+[data-theme="dark"] .pricing-card.featured .price-symbol { color: rgba(15,31,61,0.45); }
 
 .price-amount {
   font-size: 2.8rem;
@@ -522,6 +576,7 @@ nav {
   flex: 1;
 }
 .pricing-card.featured .pricing-desc { color: rgba(255,255,255,0.55); }
+[data-theme="dark"] .pricing-card.featured .pricing-desc { color: rgba(15,31,61,0.6); }
 
 .pricing-features {
   list-style: none;
@@ -540,6 +595,7 @@ nav {
   line-height: 1.5;
 }
 .pricing-card.featured .pricing-features li { color: rgba(255,255,255,0.8); }
+[data-theme="dark"] .pricing-card.featured .pricing-features li { color: rgba(15,31,61,0.85); }
 
 .check-icon {
   width: 18px;
@@ -559,6 +615,10 @@ nav {
   background: rgba(255,255,255,0.12);
   color: var(--accent);
 }
+[data-theme="dark"] .pricing-card.featured .check-icon {
+  background: rgba(15,31,61,0.1);
+  color: var(--accent);
+}
 
 .pricing-cta {
   display: block;
@@ -575,14 +635,14 @@ nav {
 }
 .pricing-cta:hover {
   background: var(--ink);
-  color: #fff;
+  color: var(--bg);
   border-color: var(--ink);
   transform: translateY(-1px);
 }
 
 .pricing-card.featured .pricing-cta {
   background: var(--accent);
-  color: var(--ink);
+  color: #0F1F3D;
   border-color: var(--accent);
 }
 .pricing-card.featured .pricing-cta:hover {
@@ -598,6 +658,7 @@ nav {
   background: var(--soft);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
+  transition: background 0.3s;
 }
 
 .process-inner {
@@ -617,12 +678,15 @@ nav {
   border: 1px solid var(--border);
   border-radius: 10px;
   background: var(--bg);
-  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s, background 0.3s;
 }
 .process-card:hover {
   border-color: var(--ink);
   transform: translateY(-4px);
   box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+}
+[data-theme="dark"] .process-card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
 }
 
 .p-num {
@@ -651,6 +715,7 @@ nav {
   padding: 100px 6%;
   background: var(--ink);
   text-align: center;
+  transition: background 0.3s;
 }
 
 .contact-inner {
@@ -673,8 +738,9 @@ nav {
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.0;
-  color: #fff;
+  color: var(--bg);
   margin-bottom: 20px;
+  transition: color 0.3s;
 }
 
 .contact-sub {
@@ -683,6 +749,7 @@ nav {
   line-height: 1.75;
   margin-bottom: 44px;
 }
+[data-theme="dark"] .contact-sub { color: rgba(13,17,23,0.55); }
 
 .contact-actions {
   display: flex;
@@ -717,6 +784,8 @@ nav {
   transition: color 0.15s, border-color 0.15s, transform 0.15s;
 }
 .btn-white:hover { color: #fff; border-color: rgba(255,255,255,0.5); transform: translateY(-2px); }
+[data-theme="dark"] .btn-white { color: rgba(13,17,23,0.55); border-color: rgba(13,17,23,0.2); }
+[data-theme="dark"] .btn-white:hover { color: rgba(13,17,23,0.9); border-color: rgba(13,17,23,0.5); }
 
 /* ── FOOTER ── */
 footer {
@@ -797,6 +866,12 @@ footer {
       <li><a href="#pricing">Pricing</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <!-- Sun icon (shown in dark mode) -->
+      <svg class="icon-moon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <!-- Moon icon (shown in light mode) -->
+      <svg class="icon-sun" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
     <a href="#contact" class="nav-cta">Let's talk</a>
   </div>
 </nav>
@@ -1016,6 +1091,16 @@ const io = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+const toggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+const saved = localStorage.getItem('theme');
+if (saved) html.setAttribute('data-theme', saved);
+toggle.addEventListener('click', () => {
+  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+});
 </script>
 </body>
 </html>
