@@ -163,33 +163,16 @@ nav {
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--ink);
+  width: 98px;
+  height: 64px;
   text-decoration: none;
-  letter-spacing: -0.01em;
 }
 
-.logo-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: var(--ink);
-  color: var(--bg);
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  box-shadow: 0 8px 20px rgba(18,32,51,0.1);
-}
-
-[data-theme="dark"] .logo-mark {
-  background: var(--accent);
-  color: #15100A;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+.logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .nav-right {
@@ -851,6 +834,7 @@ footer {
 @media (max-width: 768px) {
   .nav-links { display: none; }
   nav { padding: 0 5%; }
+  .logo { width: 88px; height: 58px; }
   .hero { padding: 64px 5% 60px; }
   .work, .pricing { padding: 60px 5%; max-width: 100%; }
   .process { padding: 60px 5%; }
@@ -898,8 +882,7 @@ footer {
 <!-- NAV -->
 <nav>
   <a href="#" class="logo" aria-label="adwitya.dev home">
-    <span class="logo-mark" aria-hidden="true">ad</span>
-    <span>adwitya.dev</span>
+    <img src="logo-trimmed.png" alt="adwitya.dev">
   </a>
   <div class="nav-right">
     <ul class="nav-links">
