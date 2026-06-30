@@ -163,8 +163,9 @@ nav {
 .logo {
   display: inline-flex;
   align-items: center;
-  width: clamp(78px, 12vw, 98px);
-  height: clamp(50px, 8vw, 64px);
+  width: clamp(70px, 10.5vw, 88px);
+  height: auto;
+  aspect-ratio: 358 / 233;
   text-decoration: none;
   flex-shrink: 0;
 }
@@ -172,9 +173,14 @@ nav {
 .logo img {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: contain;
 }
+
+.logo .logo-dark { display: none; }
+
+[data-theme="dark"] .logo .logo-light { display: none; }
+[data-theme="dark"] .logo .logo-dark { display: block; }
 
 .nav-right {
   display: flex;
@@ -835,7 +841,7 @@ footer {
 @media (max-width: 768px) {
   .nav-links { display: none; }
   nav { padding: 0 5%; }
-  .logo { width: clamp(72px, 22vw, 88px); height: clamp(46px, 14vw, 58px); }
+  .logo { width: clamp(66px, 20vw, 80px); }
   .hero { padding: 64px 5% 60px; }
   .work, .pricing { padding: 60px 5%; max-width: 100%; }
   .process { padding: 60px 5%; }
@@ -862,7 +868,7 @@ footer {
 
 @media (max-width: 480px) {
   nav { height: 60px; }
-  .logo { width: 70px; height: 44px; }
+  .logo { width: clamp(62px, 21vw, 72px); }
   .nav-right { gap: 10px; }
   .nav-cta { padding: 8px 12px; }
   .process-grid { grid-template-columns: 1fr; }
@@ -887,7 +893,8 @@ footer {
 <!-- NAV -->
 <nav>
   <a href="#" class="logo" aria-label="adwitya.dev home">
-    <img src="logo-trimmed.png" alt="adwitya.dev">
+    <img class="logo-light" src="logo-trimmed.png" alt="adwitya.dev">
+    <img class="logo-dark" src="logo-dark.png" alt="adwitya.dev">
   </a>
   <div class="nav-right">
     <ul class="nav-links">
